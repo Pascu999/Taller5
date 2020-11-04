@@ -4,7 +4,8 @@ const db = require('../config/db')
 const Clientes = db.define("clientes",{
     cliente_id  :{
         type: Sequelize.INTEGER,
-        primaryKey:true,
+        autoIncrement: true,
+        primaryKey: true
 
     },
 
@@ -36,6 +37,9 @@ const Clientes = db.define("clientes",{
         type: Sequelize.DATEONLY,
         allowNull: false
 
+    },
+    cliente_estado:{
+        type: Sequelize.INTEGER
     }
 },{
     timestamps : false

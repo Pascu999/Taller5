@@ -6,7 +6,8 @@ const Producto = require('./Clientes');
 const Ventas= db.define('ventas',{
     venta_id:{
         type: Sequelize.INTEGER,
-        primaryKey:true,
+        autoIncrement: true,
+        primaryKey: true
     },
     venta_total:{
         type: Sequelize.INTEGER,
@@ -19,7 +20,7 @@ const Ventas= db.define('ventas',{
 },{
     timestamps : false
 });
-Venta.belongsTo(Cliente,{foreignKey:'cliente_id'});
-Venta.belongsTo(Producto),{foreignKey:'producto_id'};
+Ventas.belongsTo(Cliente,{foreignKey:'cliente_id'});
+Ventas.belongsTo(Producto),{foreignKey:'producto_id'};
 
 module.exports = Ventas;

@@ -2,26 +2,8 @@ const Producto = require("../models/Productos");
 
 
 
-//obtener productos de una categoria
-
-async function getProductosCategoria() {
-  const { categoria_id } = req.params;
-  const productos = await Producto.findAll({
-    where: {
-      categoria_id,
-    },
-  });
-  if (productos.length > 0) {
-    res.json(productos);
-  } else {
-    res.json({
-      message: "No hay productos en esta categoria o no existe la categoria",
-    });
-  }
-}
-
 //Obtener productos
-async function getProductos(req, res) {
+async function getProductos() {
   try {
     const Productos = await Producto.findAll();
     res.json({
@@ -31,55 +13,37 @@ async function getProductos(req, res) {
 }
 
 //Crear producto
-async function createProducto(req, res) {
+async function createProducto(producto ) {
   const {
-    producto_codigo,
     producto_nombre,
     producto_descripcion,
-    producto_imagen,
-    producto_existencias,
-    producto_precio,
-    producto_descuento,
-    producto_iva,
-    categoria_id,
-  } = req.body;
+    producto_precio_unitario
+  } = producto;
 
   try {
     let newProducto = await Producto.create(
       {
-        producto_codigo,
         producto_nombre,
         producto_descripcion,
-        producto_imagen,
-        producto_existencias,
-        producto_precio,
-        producto_descuento,
-        producto_iva,
-        categoria_id,
+        producto_precio_unitario
       },
       {
         fields: [
-          "producto_codigo",
           "producto_nombre",
           "producto_descripcion",
-          "producto_imagen",
-          "producto_existencias",
-          "producto_precio",
-          "producto_descuento",
-          "producto_iva",
-          "categoria_id",
+          "producto_precio_unitario"
         ],
       }
     );
 
     if (newProducto) {
-      res.json({
+      console.log({
         meesage: "Producto agregado satisfactoriamente",
         data: newProducto,
       });
     }
   } catch (error) {
-    res.status(500).json({
+    console.log({
       meesage: "Error al ingresar el producto",
       data: { error },
     });
@@ -87,8 +51,8 @@ async function createProducto(req, res) {
 }
 
 //Cambiar estado producto
-async function stateProducto(req, res) {
-  const { producto_codigo } = req.params;
+async function stateProducto(producto_codigo) {
+  const  producto_codigo = producto_codigo;
   const productos = await Producto.findAll({
     attributes: ["producto_codigo", "producto_estado"],
     where: {
@@ -105,7 +69,7 @@ async function stateProducto(req, res) {
         });
       });
 
-      return res.json({
+      console.log({
         meesage: "Producto deshabilitado/habilitadoesatisfactoriamente",
         data: productos,
       });
@@ -120,27 +84,14 @@ async function editProducto(req, res) {
   const {
     producto_nombre,
     producto_descripcion,
-    producto_imagen,
-    producto_existencias,
-    producto_precio,
-    producto_descuento,
-    producto_iva,
-    producto_estado,
-    categoria_id,
+    producto_precio_unitario
   } = req.body;
 
   const productos = await Producto.findAll({
     attributes: [
-      "producto_codigo",
-      "producto_nombre",
-      "producto_descripcion",
-      "producto_imagen",
-      "producto_existencias",
-      "producto_precio",
-      "producto_descuento",
-      "producto_iva",
-      "producto_estado",
-      "categoria_id",
+      'producto_nombre',
+      'producto_descripcion',
+      'producto_precio_unitario'
     ],
 
     where: {
@@ -153,17 +104,11 @@ async function editProducto(req, res) {
       await producto.update({
         producto_nombre,
         producto_descripcion,
-        producto_imagen,
-        producto_existencias,
-        producto_precio,
-        producto_descuento,
-        producto_iva,
-        producto_estado,
-        categoria_id,
+        producto_precio_unitario
       });
     });
   }
-  return res.json({
+  console.log({
     message: "Datos cambiados correctamente",
     data: productos,
   });
@@ -173,5 +118,3 @@ exports.createProducto = createProducto;
 exports.getProductos = getProductos;
 exports.stateProducto = stateProducto;
 exports.editProducto = editProducto;
-exports.getProductosCategoria = getProductosCategoria;
-exports.getMenu = getMenu;
