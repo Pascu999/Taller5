@@ -26,7 +26,7 @@ CREATE SEQUENCE secuencia_clientes;
 
 CREATE TABLE Clientes(
 	cliente_id				   	   INT,
-	cliente_identificacion  	   VARCHAR(20) ,
+	cliente_identificacion  	   VARCHAR(20) UNIQUE,
 	cliente_nombre  	           VARCHAR(20) ,
 	cliente_apellido			   VARCHAR(20) ,
 	cliente_sexo                   INT,

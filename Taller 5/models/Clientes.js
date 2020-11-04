@@ -11,7 +11,8 @@ const Clientes = db.define("clientes",{
 
     cliente_identificacion:{
         type: Sequelize.CHAR,
-        allowNull: false
+        allowNull: false,
+        unique: true
 
     },
     cliente_nombre:{
