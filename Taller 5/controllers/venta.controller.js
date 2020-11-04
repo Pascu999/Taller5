@@ -16,6 +16,8 @@ async function getVentas() {
 }
 
 async function createVenta(venta) {
+
+  
   const { venta_total, cliente_id, producto_id } = venta;
   try {
     let newVenta = await Venta.create(
@@ -32,6 +34,7 @@ async function createVenta(venta) {
   } catch (error) {
     console.log(error);
   }
+  
 }
 
 async function stateVenta(venta_id) {

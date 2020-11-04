@@ -33,19 +33,49 @@ const arrayProductos = [
   {
     producto_nombre: "Talco",
     producto_descripcion: "Talco para pies",
-    precio_unitario: 5000,
+    producto_precio_unitario: 5000,
   },
   {
     producto_nombre: "Shampoo",
     producto_descripcion: "Shampoo para piojos",
-    precio_unitario: 4000,
+    producto_precio_unitario: 4000,
   },
   {
     producto_nombre: "Jabon",
     producto_descripcion: "Jabon corporal",
-    precio_unitario: 2000,
+    producto_precio_unitario: 2000,
   },
 ];
+
+const arrayVentas = [{
+    producto_id : 1,
+    cliente_id :  1,
+    venta_total :  5000
+},{
+    producto_id :  1,
+    cliente_id :  1,
+    venta_total : 5000
+},
+{
+    producto_id :  1,
+    cliente_id :  1,
+    venta_total : 5000
+},
+{
+    producto_id :  2,
+    cliente_id :  2,
+    venta_total :  4000
+},
+{
+    producto_id :  2,
+    cliente_id :  3,
+    venta_total :  4000
+},
+{
+    producto_id :  1,
+    cliente_id :  3,
+    venta_total :  5000
+}]
 
 try {
   arrayClientes.forEach((cliente) => {
@@ -54,6 +84,9 @@ try {
   arrayProductos.forEach((producto) => {
     Productos.createProducto(producto);
   });
+  arrayVentas.forEach((venta)=>{
+    Ventas.createVenta(venta)
+  })
 } catch (error) {
-  console.error();
+  console.log(error);
 }

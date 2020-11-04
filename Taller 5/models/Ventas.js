@@ -15,12 +15,16 @@ const Ventas= db.define('ventas',{
     venta_estado:{
         type: Sequelize.INTEGER,
         defaultValue:0
+    },
+    cliente_id:{
+        type: Sequelize.INTEGER
+    },
+    producto_id:{
+        type: Sequelize.INTEGER
     }
 
 },{
     timestamps : false
 });
-Ventas.belongsTo(Cliente,{foreignKey:'cliente_id'});
-Ventas.belongsTo(Producto),{foreignKey:'producto_id'};
 
 module.exports = Ventas;
