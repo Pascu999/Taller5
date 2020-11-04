@@ -4,12 +4,10 @@ const Producto = require("../models/Productos");
 
 //Obtener productos
 async function getProductos() {
-  try {
-    const Productos = await Producto.findAll();
-    res.json({
-      data: Productos,
+    const Productos = await Producto.findAll({
     });
-  } catch (error) {}
+    
+    return productos
 }
 
 //Crear producto
@@ -51,12 +49,11 @@ async function createProducto(producto ) {
 }
 
 //Cambiar estado producto
-async function stateProducto(producto_codigo) {
-  const  producto_codigo = producto_codigo;
+async function stateProducto(producto_id) {
   const productos = await Producto.findAll({
-    attributes: ["producto_codigo", "producto_estado"],
+    attributes: ["producto_id", "producto_estado"],
     where: {
-      producto_codigo,
+      producto_id,
     },
   });
   try {
@@ -79,13 +76,13 @@ async function stateProducto(producto_codigo) {
   }
 }
 // Editar producto
-async function editProducto(req, res) {
-  const { producto_codigo } = req.params;
+async function editProducto (producto) {
+  const {producto_codigo} = producto;
   const {
     producto_nombre,
     producto_descripcion,
     producto_precio_unitario
-  } = req.body;
+  } = producto;
 
   const productos = await Producto.findAll({
     attributes: [

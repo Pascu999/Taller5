@@ -1,10 +1,20 @@
 const Cliente = require("../models/Clientes");
 
 async function getClientes() {
-    const Clientes = await Cliente.findAll();
-    console.log(Clientes);
+    const Clientes = await Cliente.findAll(
+      
+    );
+    return Clientes;
 }
+async function getMujeres(){
+  const mujeres = await Cliente.findAll({
+    where:{
+      cliente_sexo : 1
+    }
+  })
 
+  return mujeres;
+}
 async function createCliente(cliente) {
   const {
     cliente_identificacion,
@@ -35,7 +45,7 @@ async function createCliente(cliente) {
         ],
       }
     );
-    console.log(newCliente);
+    console.log(true);
 
   } catch (error) {
     console.log(error);
@@ -43,7 +53,6 @@ async function createCliente(cliente) {
 }
 
 async function stateCliente(cliente_id) {
-  const cliente_id = cliente_id
   const clientes = await Cliente.findAll({
     attributes: ["cliente_id"],
     where: {
@@ -119,3 +128,4 @@ exports.createCliente = createCliente;
 exports.getClientes = getClientes;
 exports.stateCliente = stateCliente;
 exports.editCliente = editCliente;
+exports.getMujeres = getMujeres;

@@ -2,17 +2,14 @@ const Venta = require("../models/Ventas");
 
 async function getVentasProducto(producto){
   const ventas = await Venta.findAll({
-    where:{
-      producto_id : producto
-    }
   })
-
-  console.log(ventas);
+  return ventas;
 }
 
 async function getVentas() {
-  const Ventas = await Venta.findAll();
-  console.log(Ventas);
+  const Ventas = await Venta.findAll({
+  });
+  return Ventas;
 }
 
 async function createVenta(venta) {
